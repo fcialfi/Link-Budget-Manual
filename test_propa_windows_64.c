@@ -46,7 +46,7 @@ int main(void) {
   DllCallTMR TMR;
   DllCallEFSR EFSR; 
   
-  propaDLL = LoadLibrary("propa.dll");
+  propaDLL = LoadLibrary("propa64.dll");
   NWET = (DllCallNWET) GetProcAddress(propaDLL,"NWET");
   rain_height = (DllCallrain_height) GetProcAddress(propaDLL,"rain_height");
   temperature = (DllCalltemperature) GetProcAddress(propaDLL,"temperature");
@@ -70,7 +70,7 @@ int main(void) {
 	(rain_probability == NULL) || (LWCC == NULL) || (IWVC == NULL) ||
   (SWVD == NULL) || (gaseous_attenuation == NULL) || (gaseous_attenuation_exc == NULL) ||
   (cloud_attenuation == NULL) || (rain_attenuation == NULL) || (scintillation == NULL) || 
-  (XPD == NULL) || (noise_temperature == NULL) || (TMR == NULL) || (EFSR == NULL)) printf("Problem while loading the PROPA DLL\n");
+  (XPD == NULL) || (noise_temperature == NULL) || (TMR == NULL) || (EFSR == NULL)) { printf("Problem while loading the PROPA DLL\n"); return 1; }
 
 
   double lat, lon, f1, p, E, hs, to, eta, D, f2;
@@ -138,11 +138,11 @@ int main(void) {
   
   // SKY NOISE TEMPERATURE FOR A GIVEN TOTAL ATTENUATION 
   MeanRTemp = TMR(Temp); 
-  NoiseTemp =noise_temperature (Atotal,MeanRTemp); 
-  printf("\nSky noise temperature for the given total attenuation %.2lf dB = %.2lf K\n", Atotal, NoiseTemp);
+  NoiseTemp =noise_temperature (Agaseous_exc+Arain+Aclouds,MeanRTemp);  // total attenuation except scintillation 
+  printf("\nSky noise temperature for the total attenuation without scintillation %.2lf dB = %.2lf K\n", Agaseous_exc+Arain+Aclouds, NoiseTemp);
   
   // CROSS POLAR DISCRIMINATION EXCEEDED FOR p% OF THE TIME 
-  XPOL = XPD(Arain,to,f1,E,p);
+  XPOL = XPD(Arain,to,f1,E*180.0/M_PI,p);  // elevation in degrees here
   printf("\nCross polar discrimination exceeded for %.2lf %% of the time = %.2lf dB\n", p, XPOL);
   
   printf("\n====================================\n" ); 
@@ -155,7 +155,7 @@ int main(void) {
   
  FreeLibrary(propaDLL);
 
- return 1;
+ return 0;
 
  }
 

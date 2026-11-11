@@ -14,7 +14,7 @@ Declare Function Agaz_exceeded Lib "propa.dll" Alias "gaseous_attenuation_exc@32
 Declare Function EFSR Lib "propa.dll" Alias "EFSR@24" (ByVal freq1 As Double, ByVal freq2 As Double, ByVal Att_1 As Double) As Double
 Declare Function XPD Lib "propa.dll" Alias "XPD@40" (ByVal Arain As Double, ByVal titl_deg As Double, ByVal freq As Double, ByVal elev_deg As Double, ByVal prob As Double) As Double
 Declare Function Tmr Lib "propa.dll" Alias "TMR@8" (ByVal Ts As Double) As Double
-Declare Function Tnoise Lib "propa.dll" Alias "Noise_temperature@16" (ByVal A_total As Double, ByVal Tmr As Double) As Double
+Declare Function Tnoise Lib "propa.dll" Alias "noise_temperature@16" (ByVal A_total As Double, ByVal Tmr As Double) As Double
 Public Declare Function version Lib "propa.dll" Alias "version@0" () As Long
 
 
