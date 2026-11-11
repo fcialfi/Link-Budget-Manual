@@ -14,7 +14,7 @@ Declare Function Agaz_exceeded Lib "c:\windows\SysWOW64\propa.dll" Alias "gaseou
 Declare Function EFSR Lib "c:\windows\SysWOW64\propa.dll" Alias "EFSR@24" (ByVal freq1 As Double, ByVal freq2 As Double, ByVal Att_1 As Double) As Double
 Declare Function XPD Lib "c:\windows\SysWOW64\propa.dll" Alias "XPD@40" (ByVal Arain As Double, ByVal titl_deg As Double, ByVal freq As Double, ByVal elev_deg As Double, ByVal prob As Double) As Double
 Declare Function Tmr Lib "c:\windows\SysWOW64\propa.dll" Alias "TMR@8" (ByVal Ts As Double) As Double
-Declare Function Tnoise Lib "c:\windows\SysWOW64\propa.dll" Alias "Noise_temperature@16" (ByVal A_total As Double, ByVal Tmr As Double) As Double
+Declare Function Tnoise Lib "c:\windows\SysWOW64\propa.dll" Alias "noise_temperature@16" (ByVal A_total As Double, ByVal Tmr As Double) As Double
 Public Declare Function version Lib "c:\windows\SysWOW64\propa.dll" Alias "version@0" () As Long
 
 

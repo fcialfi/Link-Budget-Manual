@@ -90,11 +90,11 @@ printf("\n==========================\n" );
   
   // SKY NOISE TEMPERATURE FOR A GIVEN TOTAL ATTENUATION 
   MeanRTemp = TMR(Temp); 
-  NoiseTemp =noise_temperature (Atotal,MeanRTemp); 
-  printf("\nSky noise temperature for the given total attenuation %.2lf dB = %.2lf K\n", Atotal, NoiseTemp);
+  NoiseTemp =noise_temperature (Agaseous_exc+Arain+Aclouds,MeanRTemp);  // total attenuation except scintillation 
+  printf("\nSky noise temperature for the total attenuation without scintillation %.2lf dB = %.2lf K\n", Agaseous_exc+Arain+Aclouds, NoiseTemp);
   
   // CROSS POLAR DISCRIMINATION EXCEEDED FOR p% OF THE TIME 
-  XPOL = XPD(Arain,to,f1,E,p);
+  XPOL = XPD(Arain,to,f1,E*180.0/M_PI,p);  // elevation in degrees here
   printf("\nCross polar discrimination exceeded for %.2lf %% of the time = %.2lf dB\n", p, XPOL);
   
   printf("\n====================================\n" ); 
@@ -106,6 +106,6 @@ printf("\n==========================\n" );
 
 
 
-return 1;
+return 0;
 
 }
